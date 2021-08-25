@@ -26,23 +26,23 @@ session_start();
 
 // //database connection LOCALHOST
 
-	$dbhost     = "localhost";
+	// $dbhost     = "localhost";
 
-	$dbname     = "primeindia";
+	// $dbname     = "primeindia";
 
-	$dbuser     = "root";
+	// $dbuser     = "root";
 
-	$dbpass     = "";
+	// $dbpass     = "";
 
 	//database connection LOCALHOST
 
-	// $dbhost     = "localhost";
+	$dbhost     = "localhost";
 
-	// $dbname     = "rejola_primeindia";
+	$dbname     = "rejola_primeindia";
 
-	// $dbuser     = "rejola_piadmin";
+	$dbuser     = "rejola_piadmin";
 
-	// $dbpass     = "rejola_pipass";
+	$dbpass     = "rejola_pipass";
 
 	
 
