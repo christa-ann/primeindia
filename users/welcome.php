@@ -70,7 +70,7 @@ if($_SESSION['loggedIn'] != 1) {
                         <div class="card text-center m-b-30">
                             <div class="mb-2 card-body text-muted">
                                 <h3 class="text-danger"><?php ?></h3>
-                               Total Products
+                               Total Projects
                             </div>
                         </div>
                     </div> 
@@ -78,7 +78,7 @@ if($_SESSION['loggedIn'] != 1) {
                         <div class="card text-center m-b-30">
                             <div class="mb-2 card-body text-muted">
                                 <h3 class="text-purple"><?php  ?></h3>
-                                Total Orders
+                                Total Tasks
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@ if($_SESSION['loggedIn'] != 1) {
                         <div class="card text-center m-b-30">
                             <div class="mb-2 card-body text-muted">
                                 <h3 class="text-primary"><?php ?></h3>
-                                Order Today
+                                Completed Tasks
                             </div>
                         </div>
                     </div>
