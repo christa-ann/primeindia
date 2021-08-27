@@ -38,7 +38,7 @@ if($_SESSION['loggedIn'] != 1) {
                                 <input type="text" placeholder="Search..." class="form-control">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form> -->
-                            <h4 class="page-title"> <i class="dripicons-duplicate"></i> Create Task</h4>
+                            <h4 class="page-title"> <i class="dripicons-duplicate"></i> Manage/Assign Tasks</h4>
                         </div>
                     </div>
                 </div>
