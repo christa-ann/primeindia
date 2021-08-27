@@ -1,14 +1,13 @@
 <?php include('../includes/init.php'); 
-
 //only users check
 if($_SESSION['loggedIn'] != 1) {
     header("Location: ".HOST."/users/users/logout.php");
     exit();
 }
-if(User::rights($db,$_SESSION['logInID']) == 20) {
-    header("Location: ".HOST."/users/users/logout.php");
-    exit();
-}
+// if(User::rights($db,$_SESSION['logInID']) >= 20) {
+//     header("Location: ".HOST."/users/users/logout.php");
+//     exit();
+// }
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,7 +38,7 @@ if(User::rights($db,$_SESSION['logInID']) == 20) {
                                 <input type="text" placeholder="Search..." class="form-control">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form> -->
-                            <h4 class="page-title"> <i class="dripicons-duplicate"></i> Manage Users</h4>
+                            <h4 class="page-title"> <i class="dripicons-duplicate"></i> Create Task</h4>
                         </div>
                     </div>
                 </div>
@@ -56,13 +55,9 @@ if(User::rights($db,$_SESSION['logInID']) == 20) {
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                 <a class="btn btn-danger" href="<?php echo HOST;?>/users/users/inactive-users.php" style="float: right;"><span><i class=" zmdi zmdi-accounts-list"></i>Inactive Users</span></a>
-
-                                <h3>Existing Users</h3>
-                                <?php echo $_SESSION['editUserMessage'];
-            $_SESSION['editUserMessage'] = '';
-        ?>
-        <?php echo User::getList($db,'active','edit'); ?>
+                                <?php echo $_SESSION['addUserMessage'];
+                    $_SESSION['addUserMessage'] = '';
+                ?><div class="responsive"><?php echo Task::getList($db,'');?></div>
                             </div>
                         </div>
                     </div>

@@ -292,19 +292,56 @@ class User {
 		return $row['count'];
 	}
 	
-	public static function getUsersListForSelect($db,$user_type_id) {
+	public static function getUsersListForSelect($db) {
 		//$entityID = $_SESSION['entityID'];WHERE `entityid` = '{$entityID}'
 			try {
-		$query = $db->query("SELECT * FROM `users` where active=0 and user_type_id='{$user_type_id}'");
+		$query = $db->query("SELECT * FROM `users` where active=0 and rights<>100");
 			} catch (PDOException $e){ die($e->getMessage()); }
-			$list = "<option value=\"\" >Sort by Sales Persons</option>";
-			$list.= "<option value=\"\" >All </option>";
+			
+			$list= "<option value=\"\" >Select -- </option>";
 		while($row = $query->fetch(PDO::FETCH_ASSOC)) {
-			$list .= "<option value=\"{$row['loginid']}\">{$row['name']}</option>";
+			$role_name=UserType::getName($db,$row['user_type_id']);
+			$list .= "<option value=\"{$row['id']}\">{$row['name']} - [{$role_name}]</option>";
 		}
 		
 		return $list;
 	}
+	public static function getUsersListForSelected($db,$id) {
+		//$entityID = $_SESSION['entityID'];WHERE `entityid` = '{$entityID}'
+			try {
+		$query = $db->query("SELECT * FROM `users` where active=0 and rights<>100");
+			} catch (PDOException $e){ die($e->getMessage()); }
+			
+			$list= "<option value=\"\" >Select -- </option>";
+		while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+			if($row['id']==$id){$selected="selected=\"{$selected}\"";}else{$selected="";}
+			
+			$role_name=UserType::getName($db,$row['user_type_id']);
+			$list .= "<option value=\"{$row['id']}\" {$selected}>{$row['name']} - [{$role_name}]</option>";
+		}
+		
+		return $list;
 	
+	}
+	public static function getUsersListwithAssigned($db,$taskID) {
+		$getAssignedUserIDForTask=TaskAssign::getAssignedUserID($db,$taskID);
+			try {
+		$query = $db->query("SELECT * FROM `users` where active=0 and rights<>100");
+			} catch (PDOException $e){ die($e->getMessage()); }
+			
+			$list= "<option value=\"\" >Select -- </option>";
+		while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+
+			if($getAssignedUserIDForTask!=''){
+				
+				if($row['id']==$getAssignedUserIDForTask){$selected="selected=\"{$selected}\"";}else{$selected="";}
+			}
+			
+			$role_name=UserType::getName($db,$row['user_type_id']);
+			$list .= "<option value=\"{$row['id']}\" {$selected}>{$row['name']} - [{$role_name}]</option>";
+		}
+		
+		return $list;
 	
+	}
 }

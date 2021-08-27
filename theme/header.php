@@ -42,9 +42,9 @@ if(User::rights($db,$_SESSION['logInID']) >= 20  ) {
     $tasksMenu.= "<li class=\"has-submenu\">
                                     <a href=\"#\"><i class=\"dripicons-checklist\"></i>Tasks <i class=\"mdi mdi-chevron-down mdi-drop\"></i></a>
                                     <ul class=\"submenu\">";
-    $tasksMenu.="<li><a href=\"#\"><span>Add Task</span></a></li>";
-    $tasksMenu.="<li><a href=\"#\"><span>Assign Task</span></a></li>";
-    $tasksMenu.="<li><a href=\"#\"><span>Manage Tasks</span></a></li>";        
+    $tasksMenu.="<li><a href=\"".HOST."/users/task/add-task.php\"><span>Add Task</span></a></li>";
+    //$tasksMenu.="<li><a href=\"#\"><span>Assign Task</span></a></li>";
+    $tasksMenu.="<li><a href=\"".HOST."/users/task/manage-tasks.php\"><span>Manage Tasks</span></a></li>";        
     $tasksMenu.="</ul></li>";    
     
 }

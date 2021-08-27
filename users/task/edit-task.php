@@ -4,10 +4,12 @@ if($_SESSION['loggedIn'] != 1) {
     header("Location: ".HOST."/users/users/logout.php");
     exit();
 }
-if(User::rights($db,$_SESSION['logInID']) == 20) {
-    header("Location: ".HOST."/users/users/logout.php");
-    exit();
-}
+// if(User::rights($db,$_SESSION['logInID']) >= 20) {
+//     header("Location: ".HOST."/users/users/logout.php");
+//     exit();
+// }
+$taskID=$_GET['temp'];
+$task_detail=new Task($db,$taskID);
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,7 +40,7 @@ if(User::rights($db,$_SESSION['logInID']) == 20) {
                                 <input type="text" placeholder="Search..." class="form-control">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form> -->
-                            <h4 class="page-title"> <i class="dripicons-duplicate"></i> Add Users</h4>
+                            <h4 class="page-title"> <i class="dripicons-duplicate"></i> Edit Task</h4>
                         </div>
                     </div>
                 </div>
@@ -58,25 +60,36 @@ if(User::rights($db,$_SESSION['logInID']) == 20) {
                                 <?php echo $_SESSION['addUserMessage'];
                     $_SESSION['addUserMessage'] = '';
                 ?><div class="responsive">
-        <form method="post" action="php/users.php" onSubmit="return confirm('Submit?');">
+        <form method="post" action="php/tasks.php" onSubmit="return confirm('Submit?');">
 
             <table class="table">
                 <tr>
                     <td>Name</td>
-                    <td><input type="text" class="form-control" name="name" required=""></td>
+                    <td><input type="text" class="form-control" name="name" required="" value="<?php echo $task_detail->name; ?>"></td>
+                </tr>
+                 <tr>
+                    <td>Description</td>
+                    <td><input type="text" class="form-control" name="description" required="" value="<?php echo $task_detail->description; ?>"></td>
+                </tr>
+                 <tr>
+                    <td>Turn around Time (TAT) (in days)</td>
+                    <td><input type="number" class="form-control" name="tat" required="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="<?php echo $task_detail->tat; ?>"></td>
                 </tr>
                 <tr>
-                    <td>Email ID /Log In ID</td>
-                    <td><input type="email" class="form-control" name="logInID" placeholder="( without space )"></td>
+                    <td>Stage</td>
+                    <td><select name="stage" class="form-control">
+                        <?php echo TaskStage::getListForSelected($db,$task_detail->id); ?>
+                    </select></td>
                 </tr>
-                <tr>
-                    <td>User Role</td>
-                    <td><select class="form-control" name="usertypeid">
-                        <?php echo UserType::getListForSelect($db); ?></select></td>
-                </tr>
+                <!-- <tr>
+                    <td>Assigned To</td>
+                    <td><select name="assign_to" class="form-control">
+                        <?php //echo User::getUsersListForSelected($db,$task_detail->id); ?>
+                    </select></td>
+                </tr> -->
                 <tr>
                     <td></td>
-                    <td><input type="submit" class="btn btn-success" name="addUser" value="ADD"></td>
+                    <td><input type="submit" class="btn btn-success" name="updateTask" value="UPDATE"></td>
                 </tr>
             </table>
         </form>
