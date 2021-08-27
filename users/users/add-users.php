@@ -66,7 +66,7 @@ if($_SESSION['loggedIn'] != 1) {
                     <td><input type="email" class="form-control" name="logInID" placeholder="( without space )"></td>
                 </tr>
                 <tr>
-                    <td>User Type</td>
+                    <td>User Role</td>
                     <td><select class="form-control" name="usertypeid">
                         <?php echo UserType::getListForSelect($db); ?></select></td>
                 </tr>

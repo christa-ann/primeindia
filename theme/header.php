@@ -23,7 +23,7 @@ if(User::rights($db,$_SESSION['logInID']) >= 20) {
 }
 
 $usersMenu="";
-if(User::rights($db,$_SESSION['logInID']) >= 20 && $userType<=1) {
+if(User::rights($db,$_SESSION['logInID']) >= 20 ) {
     $usersMenu.= "<li class=\"has-submenu\">
                                     <a href=\"#\"><i class=\"dripicons-suitcase\"></i> Users <i class=\"mdi mdi-chevron-down mdi-drop\"></i></a>
                                     <ul class=\"submenu\">";
@@ -37,16 +37,15 @@ if(User::rights($db,$_SESSION['logInID']) >= 20 && $userType<=1) {
     
 } 
 
-$ordersMenu="";
-if(User::rights($db,$_SESSION['logInID']) >= 20 ) {
-    $ordersMenu.= "<li class=\"has-submenu\">
-                                    <a href=\"#\"><i class=\"dripicons-cart\"></i>Orders <i class=\"mdi mdi-chevron-down mdi-drop\"></i></a>
+$tasksMenu="";
+if(User::rights($db,$_SESSION['logInID']) == 20  ) {
+    $tasksMenu.= "<li class=\"has-submenu\">
+                                    <a href=\"#\"><i class=\"dripicons-cart\"></i>Tasks <i class=\"mdi mdi-chevron-down mdi-drop\"></i></a>
                                     <ul class=\"submenu\">";
-    $ordersMenu.="<li><a href=\"".HOST."/users/orders/view-orders.php\"><span>Manage Orders</span></a></li>";
-    
-    
-    $ordersMenu.="</ul></li>";
-    
+    $tasksMenu.="<li><a href=\"#\"><span>Add Task</span></a></li>";
+    $tasksMenu.="<li><a href=\"#\"><span>Assign Task</span></a></li>";
+    $tasksMenu.="<li><a href=\"#\"><span>Manage Tasks</span></a></li>";        
+    $tasksMenu.="</ul></li>";    
     
 }
 
