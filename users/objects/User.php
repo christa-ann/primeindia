@@ -111,7 +111,13 @@ class User {
 		return $row['rights'];
 	}
 	
-	
+	public static function rightsForID($db,$id) {
+			try {
+		$query = $db->query("SELECT `rights` FROM `users` WHERE `id` = '{$id}'");
+			} catch (PDOException $e){ die($e->getMessage()); }
+		$row = $query->fetch(PDO::FETCH_ASSOC);
+		return $row['rights'];
+	}
 	
 	public static function checkLogInIDexists($db,$logInID) {
 			try {
@@ -333,7 +339,7 @@ class User {
 		while($row = $query->fetch(PDO::FETCH_ASSOC)) {
 
 			if($getAssignedUserIDForTask!=''){
-				
+
 				if($row['id']==$getAssignedUserIDForTask){$selected="selected=\"{$selected}\"";}else{$selected="";}
 			}
 			

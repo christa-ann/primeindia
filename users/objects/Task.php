@@ -69,13 +69,14 @@ class Task{
       }  
     }
     public static function getList($db,$userID) {
-    	if($userID!=""){
-    		$user_sql="and added_by='{$userID}'";
-    	}
-    	else
-    	{
-    		$user_sql="";
-    	}
+    	// $rights=User::rightsForID($db,$userID);
+    	// if($rights=="100"){
+    	// 	$colhead="";
+    	// }
+    	// else
+    	// {
+    	// 	$colhead="";
+    	// }
 		
 			try {
 		$query = $db->query("SELECT * FROM task where active=0 order by added_on desc ");
