@@ -35,7 +35,7 @@ if(isset($_POST['updateTask'])) {
 	$name=$_POST['name'];
 	$description=$_POST['description'];
 	$tat=$_POST['tat'];
-	$assign_to=$_POST['assign_to'];
+	//$assign_to=$_POST['assign_to'];
 	$stage=$_POST['stage'];
 	//checking length to be minimum of 4 characters
 	if(strlen($_POST['name']) >= 4) {

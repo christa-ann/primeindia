@@ -43,6 +43,31 @@ class Task{
         return false;
       }  
     }
+    public static function update($db,$name,$description,$tat,$stage,$updated_by,$updated_on) {          
+          
+         try {
+    $query=$db->prepare("UPDATE `task` SET `name`=:name,`description`=:description,`tat`=:tat,`stage`=:stage,`updated_by`=:updated_by,`updated_on`=:updated_on");
+    //return true;
+      } catch (PDOException $e){ die($e->getMessage()); return false;}
+      $query->bindParam(':name', $name); 
+     
+      $query->bindParam(':description', $description); 
+      $query->bindParam(':tat', $tat); 
+     
+      $query->bindParam(':updated_on', $updated_on); 
+      $query->bindParam(':updated_by', $updated_by); 
+      
+      $query->bindParam(':stage', $stage);
+      
+     // $query->bindParam(':active', $active);
+
+      if($query->execute()){
+        return true;
+      }else
+      {
+        return false;
+      }  
+    }
     public static function getList($db,$userID) {
     	if($userID!=""){
     		$user_sql="and added_by='{$userID}'";
