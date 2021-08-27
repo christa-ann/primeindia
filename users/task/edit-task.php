@@ -89,7 +89,9 @@ $task_detail=new Task($db,$taskID);
                 </tr> -->
                 <tr>
                     <td></td>
-                    <td><input type="submit" class="btn btn-success" name="updateTask" value="UPDATE"></td>
+                    <td>
+                       <input type="hidden" name="taskID" value="<?php echo $task_detail->id;?>">
+                        <input type="submit" class="btn btn-success" name="updateTask" value="UPDATE"></td>
                 </tr>
             </table>
         </form>

@@ -44,14 +44,14 @@ if(isset($_POST['updateTask'])) {
 			//add task
 			
 			$_SESSION['addUserMessage'] = "<h5 style=\"color:green;\">Task Updated.</h5>";
-			header("Location: ../manage-users.php");
+			header("Location: ../edit-task.php?temp={$_POST['taskID']}");
 		} else {
 			$_SESSION['addUserMessage'] = "<h5 style=\"color:red;\">Please contact Admin</h5>";
-			header("Location: ../add-task.php");
+			header("Location: ../edit-task.php?temp={$_POST['taskID']}");
 		}
 	} else {
 		$_SESSION['addUserMessage'] = "<h5 style=\"color:red;\">Name and Log In ID have to have minimum 4 characters.</h5>";
-		header("Location: ../add-task.php");
+		header("Location: ../edit-task.php?temp={$_POST['taskID']}");
 
 	}
 	//header("Location: ../manage-users.php");
