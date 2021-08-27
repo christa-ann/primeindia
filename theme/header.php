@@ -23,7 +23,7 @@ if(User::rights($db,$_SESSION['logInID']) >= 20) {
 }
 
 $usersMenu="";
-if(User::rights($db,$_SESSION['logInID']) >= 20 ) {
+if(User::rights($db,$_SESSION['logInID']) > 20 ) {
     $usersMenu.= "<li class=\"has-submenu\">
                                     <a href=\"#\"><i class=\"dripicons-suitcase\"></i> Users <i class=\"mdi mdi-chevron-down mdi-drop\"></i></a>
                                     <ul class=\"submenu\">";
@@ -217,6 +217,7 @@ if(User::rights($db,$_SESSION['logInID']) == 20  ) {
                                 <?php 
                                       
                                       echo $usersMenu; 
+                                      echo $tasksMenu;
                                       
                                 ?>
                                 <!-- <li class="has-submenu">
