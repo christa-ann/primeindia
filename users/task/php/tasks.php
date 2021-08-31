@@ -67,4 +67,23 @@ if($_POST['deleteTask']){
 		echo "error";
 	}
 }
+if($_POST['assignTask']){
+	//print_r($_POST);
+	$taskID=$_POST['taskID'];
+	$userID=$_POST['userID'];
+	$assigned_on=date("Y-m-d H:i:s");
+	$assigned_by=User::getUserIDwithLogInID($db,$_SESSION['logInID']);
+	if(Task::updateAssign($db,$taskID,$userID)){
+
+		if($userID!='')
+		{
+			TaskAssign::add($db,$taskID,$userID,$assigned_on,$assigned_by);
+		}
+		echo "Assigned";
+	}
+	else
+	{
+		echo "error";
+	}
+}
 ?>

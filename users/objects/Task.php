@@ -77,9 +77,17 @@ class Task{
     	// {
     	// 	$colhead="";
     	// }
-		
+		if($userID!=""){
+			$user_condition=" and  active_assigned_user='{$userID}'";
+		}
+		else
+		{
+			$user_condition="";
+		}
 			try {
-		$query = $db->query("SELECT * FROM task where active=0 order by added_on desc ");
+		
+		
+		$query = $db->query("SELECT * FROM task where active=0 {$user_condition} order by added_on desc ");
 
 			} catch (PDOException $e){ die($e->getMessage()); }
 
@@ -97,8 +105,8 @@ class Task{
 						<th>Added by </th>
 						<th>Updated on </th>
 						<th>Updated by </th>
-						<th>Actions</th>
-						<th style=\"background-color:yellow;\">Assign to</th>
+						<th>Actions (By PM)</th>
+						<th style=\"background-color:yellow;\">Assign/Move to</th>
 						<th >Team Updates</th>
 					</tr></thead>
 				";$count=1;
@@ -108,7 +116,15 @@ class Task{
 			$stage="<span class=\"badge {$stage_class}\">{$stage_name}</span>";
 			$added_by_name=User::getNameForID($db,$row['added_by']);
 			$updated_by_name=User::getNameForID($db,$row['updated_by']);
-			$assigned_to="<select name=\"assign_to\" class=\"form-control\">".User::getUsersListwithAssigned($db,$row['id'])."</select>";
+			
+			if($userID==""){
+				$action="<a href=\"edit-task.php?temp={$row['id']}\" class=\"btn btn-warning waves-effect waves-light \"><i class=\"fa fa-edit\"></i></a>&nbsp;<button class=\"btn btn-danger waves-effect waves-light deleteTask\" id=\"{$row['id']}\" ><i class=\"fa fa-trash\"></i></button>";
+				$assigned_to="<select name=\"assign_to\" class=\"form-control assign\" id=\"task_{$row['id']}\">".User::getUsersListForSelected($db,$row['active_assigned_user'])."</select>";
+			}
+			else{
+				$action="";
+				$assigned_to="<span class=\"badge badge-warning\">".User::getNameForID($db,$userID)."</span>";
+			}
 			$list .= "
 						<tr>
 							<td>{$count}</td>
@@ -120,7 +136,7 @@ class Task{
 							<td>{$added_by_name}</td>
 							<td>{$row['updated_on']}</td>
 							<td>{$updated_by_name}</td>
-							<td style=\"width:150px;\"> <a href=\"edit-task.php?temp={$row['id']}\" class=\"btn btn-warning waves-effect waves-light \"><i class=\"fa fa-edit\"></i></a>&nbsp;<button class=\"btn btn-danger waves-effect waves-light deleteTask\" id=\"{$row['id']}\" ><i class=\"fa fa-trash\"></i></button> </td>
+							<td style=\"width:150px;\"> {$action} </td>
 							<td style=\"background-color:yellow;\">{$assigned_to}</td>
 							<td></td>
 						</tr>
@@ -141,6 +157,22 @@ class Task{
 
 			// $query->bindParam(':active', $active);
 			$query->bindParam(':rowID', $rowID);
+
+	      if($query->execute()){
+	        return true;
+	      }else
+	      {
+	        return false;
+	      }  
+	}
+	public static function updateAssign($db,$taskID,$userID) {
+		$active=1;
+			try {
+		$query=$db->prepare("UPDATE `task` SET `active_assigned_user` = :userID WHERE `id` = :taskID"); 
+			} catch (PDOException $e){ die($e->getMessage()); }
+
+		    $query->bindParam(':userID', $userID);
+			$query->bindParam(':taskID', $taskID);
 
 	      if($query->execute()){
 	        return true;

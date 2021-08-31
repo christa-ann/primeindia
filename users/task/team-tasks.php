@@ -38,7 +38,7 @@ if($_SESSION['loggedIn'] != 1) {
                                 <input type="text" placeholder="Search..." class="form-control">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form> -->
-                            <h4 class="page-title"> <i class="dripicons-duplicate"></i> Manage/Assign Tasks</h4>
+                            <h4 class="page-title"> <i class="dripicons-duplicate"></i> Your Assigned Tasks</h4>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@ if($_SESSION['loggedIn'] != 1) {
                             <div class="card-body">
                                 <?php echo $_SESSION['addUserMessage'];
                     $_SESSION['addUserMessage'] = '';
-                ?><div class="responsive"><?php echo Task::getList($db,'');?></div>
+                ?><div class="responsive"><?php echo Task::getList($db,$userID);?></div>
                             </div>
                         </div>
                     </div>
@@ -108,36 +108,6 @@ if($_SESSION['loggedIn'] != 1) {
 
         
      });
-     $(document).on('change','.assign',function(){
-        var id=this.id;
-        var iddata=id.split("_");
-        var taskID=iddata[1];
-        var userID=this.value;
-        swal("Confirm to assign?").then(function(res){
-            if(res){
-                $.ajax({
-                    url: "php/tasks.php",
-                    type: "post",
-                    data:"assignTask=1&taskID="+taskID+"&userID="+userID,
-                    
-                    success: function(data){
-                        //alert(data);
-                         if(data!="error"){
-                            
-                             itoast.show("Assigned Successfully",5000,'theme_dark');
-                        }
-                        else
-                        {
-                            itoast.show("Cannot be Assigned." +data,5000,'theme_dark');
-                        }
-                       // window.location.reload();
-                      
-                    },
-                    error: function(){}             
-                });
-            }
-        })
-    });
 
  });
 </script>
