@@ -9,7 +9,7 @@ if($_SESSION['loggedIn'] != 1) {
 //     exit();
 // }
 $taskID=$_GET['temp'];
-$task_detail=new Task($db,$taskID);
+$task_detail=new Task($db,$taskID); var_dump($task_detail);
 ?>
 <!DOCTYPE html>
 <html>
