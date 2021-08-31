@@ -45,7 +45,9 @@ class TaskStage{
 			
 			$list= "<option value=\"\" >Select -- </option>";
 		while($row = $query->fetch(PDO::FETCH_ASSOC)) {
-			if($row['id']==$id){$selected="selected=\"{$selected}\"";}else{$selected="";}
+			if($row['id']==$id)
+				{$selected="selected=\"selected\"";}
+			else{$selected="";}
 			
 			
 			$list .= "<option value=\"{$row['id']}\" {$selected}>{$row['name']} </option>";
