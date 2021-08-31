@@ -74,6 +74,42 @@ if($_SESSION['loggedIn'] != 1) {
 
 
        <?php include(ROOT.'/theme/js-links.php'); ?>
+<script type="text/javascript">
+    
 
+ $(document).ready(function(){
+     $(document).on('click','.deleteTask',function(){
+        var rowID=this.id;
+        //alert(rowID);
+        swal("Are you Sure?").then(function(res){
+            if(res){
+                $.ajax({
+                    url: "php/tasks.php",
+                    type: "post",
+                    data:"deleteTask=1&rowID="+rowID,
+                    
+                    success: function(data){
+                        //alert(data);
+                         if(data!="error"){
+                            
+                             itoast.show("Deleted Successfully",5000,'theme_dark');
+                        }
+                        else
+                        {
+                            itoast.show("Cannot be Deleted." +data,5000,'theme_dark');
+                        }
+                        window.location.reload();
+                      
+                    },
+                    error: function(){}             
+                });
+            }
+        })
+
+        
+     });
+
+ });
+</script>
     </body>
 </html>

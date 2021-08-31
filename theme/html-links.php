@@ -18,3 +18,4 @@
         <link href="<?php echo HOST; ?>/assets/css/icons.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo HOST; ?>/assets/css/style.css" rel="stylesheet" type="text/css" />
          <link href="<?php echo HOST; ?>/assets/css/itoast.css" rel="stylesheet" type="text/css" />
+         <script src="<?php echo  HOST; ?>/assets/plugins/sweet=alert2/sweetalert2.min.css"></script>

@@ -15,7 +15,7 @@ if(isset($_POST['addTask'])) {
 			//add task
 			
 			$_SESSION['addUserMessage'] = "<h5 style=\"color:green;\">Task Added.</h5>";
-			header("Location: ../manage-users.php");
+			header("Location: ../manage-tasks.php");
 		} else {
 			$_SESSION['addUserMessage'] = "<h5 style=\"color:red;\">Please contact Admin</h5>";
 			header("Location: ../add-task.php");
@@ -40,7 +40,7 @@ if(isset($_POST['updateTask'])) {
 	//checking length to be minimum of 4 characters
 	if(strlen($_POST['name']) >= 4) {
 		//checking if log in id already exists
-		if(Task::update($db,$name,$description,$tat,$stage,$updated_by,$updated_on)) {
+		if(Task::update($db,$name,$description,$tat,$stage,$updated_by,$updated_on,$_POST['taskID'])) {
 			//add task
 			
 			$_SESSION['addUserMessage'] = "<h5 style=\"color:green;\">Task Updated.</h5>";
@@ -56,5 +56,15 @@ if(isset($_POST['updateTask'])) {
 	}
 	//header("Location: ../manage-users.php");
 	exit();
+}
+if($_POST['deleteTask']){
+	//print_r($_POST);
+	if(Task::deactivate($db,$_POST['rowID'])){
+		echo "Deleted";
+	}
+	else
+	{
+		echo "error";
+	}
 }
 ?>

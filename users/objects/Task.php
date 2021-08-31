@@ -43,10 +43,10 @@ class Task{
         return false;
       }  
     }
-    public static function update($db,$name,$description,$tat,$stage,$updated_by,$updated_on) {          
+    public static function update($db,$name,$description,$tat,$stage,$updated_by,$updated_on,$taskID) {          
           
          try {
-    $query=$db->prepare("UPDATE `task` SET `name`=:name,`description`=:description,`tat`=:tat,`stage`=:stage,`updated_by`=:updated_by,`updated_on`=:updated_on");
+    $query=$db->prepare("UPDATE `task` SET `name`=:name,`description`=:description,`tat`=:tat,`stage`=:stage,`updated_by`=:updated_by,`updated_on`=:updated_on where id=:taskID");
     //return true;
       } catch (PDOException $e){ die($e->getMessage()); return false;}
       $query->bindParam(':name', $name); 
@@ -59,7 +59,7 @@ class Task{
       
       $query->bindParam(':stage', $stage);
       
-     // $query->bindParam(':active', $active);
+     $query->bindParam(':taskID', $taskID);
 
       if($query->execute()){
         return true;
@@ -120,7 +120,7 @@ class Task{
 							<td>{$added_by_name}</td>
 							<td>{$row['updated_on']}</td>
 							<td>{$updated_by_name}</td>
-							<td style=\"width:150px;\"> <a href=\"edit-task.php?temp={$row['id']}\" class=\"btn btn-warning waves-effect waves-light \"><i class=\"fa fa-edit\"></i></a>&nbsp;<button class=\"btn btn-danger waves-effect waves-light deleteExpense\" id=\"{$row['id']}\" ><i class=\"fa fa-trash\"></i></button> </td>
+							<td style=\"width:150px;\"> <a href=\"edit-task.php?temp={$row['id']}\" class=\"btn btn-warning waves-effect waves-light \"><i class=\"fa fa-edit\"></i></a>&nbsp;<button class=\"btn btn-danger waves-effect waves-light deleteTask\" id=\"{$row['id']}\" ><i class=\"fa fa-trash\"></i></button> </td>
 							<td style=\"background-color:yellow;\">{$assigned_to}</td>
 							<td></td>
 						</tr>
@@ -132,6 +132,22 @@ class Task{
 		}
 		$list .= "</table></div>";
 		return $list;
+	}
+	public static function deactivate($db,$rowID) {
+		$active=1;
+			try {
+		$query=$db->prepare("UPDATE `task` SET `active` = 1 WHERE `id` = :rowID"); 
+			} catch (PDOException $e){ die($e->getMessage()); }
+
+			// $query->bindParam(':active', $active);
+			$query->bindParam(':rowID', $rowID);
+
+	      if($query->execute()){
+	        return true;
+	      }else
+	      {
+	        return false;
+	      }  
 	}
 }
 
