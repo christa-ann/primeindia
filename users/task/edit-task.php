@@ -78,7 +78,7 @@ $task_detail=new Task($db,$taskID);
                 <tr>
                     <td>Stage</td>
                     <td><select name="stage" class="form-control">
-                        <?php echo TaskStage::getListForSelected($db,$task_detail->id); ?>
+                        <?php echo TaskStage::getListForSelected($db,$task_detail->stage); ?>
                     </select></td>
                 </tr>
                 <!-- <tr>
