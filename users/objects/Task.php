@@ -99,7 +99,7 @@ class Task{
 						<th>Sl No</th>
 						<th>Name</th>
 						<th>Description</th>
-						<th>Turn Around Time (days)</th>
+						<th >TAT (days)</th>
 						<th>Stage </th>	
 						<th>Added on </th>
 						<th>Added by </th>
@@ -120,10 +120,12 @@ class Task{
 			if($userID==""){
 				$action="<a href=\"edit-task.php?temp={$row['id']}\" class=\"btn btn-warning waves-effect waves-light \"><i class=\"fa fa-edit\"></i></a>&nbsp;<button class=\"btn btn-danger waves-effect waves-light deleteTask\" id=\"{$row['id']}\" ><i class=\"fa fa-trash\"></i></button>";
 				$assigned_to="<select name=\"assign_to\" class=\"form-control assign\" id=\"task_{$row['id']}\">".User::getUsersListForSelected($db,$row['active_assigned_user'])."</select>";
+				$team_action="<a href=\"#\" class=\"btn btn-purple waves-effect waves-light btn-sm viewNote\" data-id=\"{$row['id']}\">View </a>";
 			}
 			else{
 				$action="";
 				$assigned_to="<span class=\"badge badge-warning\">".User::getNameForID($db,$userID)."</span>";
+				$team_action="<a href=\"#\" class=\"btn btn-dark waves-effect waves-light btn-sm updateNote \" data-id=\"{$row['id']}\" >Update Notes</a><br><br><a href=\"#\" class=\"btn btn-purple waves-effect waves-light btn-sm viewNote\" data-id=\"{$row['id']}\">View Notes</a>";
 			}
 			$list .= "
 						<tr>
@@ -138,13 +140,13 @@ class Task{
 							<td>{$updated_by_name}</td>
 							<td style=\"width:150px;\"> {$action} </td>
 							<td style=\"background-color:yellow;\">{$assigned_to}</td>
-							<td></td>
+							<td>{$team_action}</td>
 						</tr>
 					";
 			$count++;
 		}
 		if($query->rowcount()==0){
-			$list.="<tr><td colspan=\"5\"> No Expenses added.</td></tr>";
+			$list.="<tr><td colspan=\"5\"> No Tasks added.</td></tr>";
 		}
 		$list .= "</table></div>";
 		return $list;

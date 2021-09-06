@@ -71,7 +71,7 @@ if($_SESSION['loggedIn'] != 1) {
         <!-- Footer -->
        <?php include(ROOT.'/theme/footer.php'); ?>
         <!-- End Footer -->
-
+<?php include('modal.php'); ?>
 
        <?php include(ROOT.'/theme/js-links.php'); ?>
 <script type="text/javascript">
@@ -138,6 +138,25 @@ if($_SESSION['loggedIn'] != 1) {
             }
         })
     });
+     $(document).on('click','.viewNote',function(e){
+        e.preventDefault();
+        var taskID=$(this).attr('data-id');
+        
+        $.ajax({
+                    url: "php/tasks.php",
+                    type: "post",
+                    data:"getTaskUpdates=1&taskID="+taskID,
+                    
+                    success: function(data){
+                        //alert(data);
+                         $("#viewUpdateModal .modal-body").html(data);
+                         $("#viewUpdateModal").modal('show');
+                    },
+                    error: function(){}             
+                });
+
+
+     });
 
  });
 </script>

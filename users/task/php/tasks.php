@@ -86,4 +86,7 @@ if($_POST['assignTask']){
 		echo "error";
 	}
 }
+if($_POST['getTaskUpdates']){
+	echo TaskUpdate::getList($db,$_POST['taskID']);
+}
 ?>

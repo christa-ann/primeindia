@@ -30,11 +30,11 @@
         <script src="<?php echo  HOST; ?>/assets/plugins/datatables/buttons.print.min.js"></script>
         <script src="<?php echo  HOST; ?>/assets/plugins/datatables/buttons.colVis.min.js"></script>
         <!-- Responsive examples -->
-        <script src="<?php echo  HOST; ?>/assets/plugins/datatables/dataTables.responsive.min.js"></script>
-        <script src="<?php echo  HOST; ?>/assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
+        <!--<script src="<?php echo  HOST; ?>/assets/plugins/datatables/dataTables.responsive.min.js"></script>
+         <script src="<?php echo  HOST; ?>/assets/plugins/datatables/responsive.bootstrap4.min.js"></script> -->
 
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <!-- Datatable init js -->
-        <!-- <script src="<?php echo  HOST; ?>/assets/pages/datatables.init.js"></script> -->
+        <script src="<?php echo  HOST; ?>/assets/pages/datatables.init.js"></script>
   
