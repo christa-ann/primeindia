@@ -76,7 +76,7 @@ $task_detail=new Task($db,$taskID);
                     <td><input type="number" class="form-control" name="tat" required="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="<?php echo $task_detail->tat; ?>"></td>
                 </tr>
                 <tr>
-                    <td>Stage</td>
+                    <td>Stage <Br> (Completion date is captured when stage is selected to completed)</td>
                     <td><select name="stage" class="form-control">
                         <?php echo TaskStage::getListForSelected($db,$task_detail->stage); ?>
                     </select></td>
