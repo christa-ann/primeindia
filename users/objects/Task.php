@@ -183,6 +183,21 @@ class Task{
 	        return false;
 	      }  
 	}
+	public static function updateCompletion($db,$taskID) {
+		$completion_date=date("Y-m-d");
+		$query=$db->prepare("UPDATE `task` SET `completion_date` = :completion_date WHERE `id` = :taskID"); 
+			} catch (PDOException $e){ die($e->getMessage()); }
+
+		    $query->bindParam(':completion_date', $completion_date);
+			$query->bindParam(':taskID', $taskID);
+
+	      if($query->execute()){
+	        return true;
+	      }else
+	      {
+	        return false;
+	      }  
+	}
 }
 
 ?>

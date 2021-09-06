@@ -42,7 +42,9 @@ if(isset($_POST['updateTask'])) {
 		//checking if log in id already exists
 		if(Task::update($db,$name,$description,$tat,$stage,$updated_by,$updated_on,$_POST['taskID'])) {
 			//add task
-			
+			if($stage=='3'){
+				Task::updateCompletion($db,$_POST['taskID']);
+			}
 			$_SESSION['addUserMessage'] = "<h5 style=\"color:green;\">Task Updated.</h5>";
 			header("Location: ../edit-task.php?temp={$_POST['taskID']}");
 		} else {
