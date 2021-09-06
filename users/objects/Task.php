@@ -139,7 +139,7 @@ class Task{
 							<td>{$added_by_name}</td>
 							<td>{$row['updated_on']}</td>
 							<td>{$updated_by_name}</td>
-							<td>{$row['completion_date']}</td>
+							<td></td>
 							<td style=\"width:150px;\"> {$action} </td>
 							<td style=\"background-color:yellow;\">{$assigned_to}</td>
 							<td>{$team_action}</td>
