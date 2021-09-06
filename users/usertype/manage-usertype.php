@@ -52,7 +52,7 @@ if($_SESSION['loggedIn'] != 1) {
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
- <h3>Add User Role</h3>
+<!--  <h3>Add User Role</h3>
                                 <?php echo $_SESSION['addItemMessage'];
             $_SESSION['addItemMessage'] = '';
         ?>
@@ -69,7 +69,7 @@ if($_SESSION['loggedIn'] != 1) {
                 </tr>
             </table>
         </form>
-    </div>
+    </div> -->
 
 
                                 <h3>Existing User Roles</h3>
