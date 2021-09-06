@@ -105,7 +105,7 @@ class Task{
 						<th>Added by </th>
 						<th>Updated on </th>
 						<th>Updated by </th>
-						<th>Completed on </th>
+						<th>Completed On </th>
 						<th>Actions (By PM)</th>
 						<th style=\"background-color:yellow;\">Assign/Move to</th>
 						<th >Team Updates</th>
@@ -139,7 +139,7 @@ class Task{
 							<td>{$added_by_name}</td>
 							<td>{$row['updated_on']}</td>
 							<td>{$updated_by_name}</td>
-							<td></td>
+							<td>{$row['completion_date']}</td>
 							<td style=\"width:150px;\"> {$action} </td>
 							<td style=\"background-color:yellow;\">{$assigned_to}</td>
 							<td>{$team_action}</td>
@@ -187,11 +187,12 @@ class Task{
 	}
 	public static function updateCompletion($db,$taskID) {
 		$completion_date=date("Y-m-d");
+		try{
 		$query=$db->prepare("UPDATE `task` SET `completion_date` = :completion_date WHERE `id` = :taskID"); 
 			} catch (PDOException $e){ die($e->getMessage()); }
 
 		    $query->bindParam(':completion_date', $completion_date);
-			$query->bindParam(':taskID', $taskID);
+			$query->bindParam(':taskID',$taskID);
 
 	      if($query->execute()){
 	        return true;
