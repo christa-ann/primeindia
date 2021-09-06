@@ -105,6 +105,7 @@ class Task{
 						<th>Added by </th>
 						<th>Updated on </th>
 						<th>Updated by </th>
+						<th>Completed on </th>
 						<th>Actions (By PM)</th>
 						<th style=\"background-color:yellow;\">Assign/Move to</th>
 						<th >Team Updates</th>
@@ -138,6 +139,7 @@ class Task{
 							<td>{$added_by_name}</td>
 							<td>{$row['updated_on']}</td>
 							<td>{$updated_by_name}</td>
+							<td>{$row['completion_date']}</td>
 							<td style=\"width:150px;\"> {$action} </td>
 							<td style=\"background-color:yellow;\">{$assigned_to}</td>
 							<td>{$team_action}</td>
