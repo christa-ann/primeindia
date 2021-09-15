@@ -9,14 +9,14 @@
                                                         <button class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form id="taskupdate" enctype="multipart/form-data">
+                                                        <form id="taskupdate" enctype="multipart/form-data" method="post">
                                                             <label>Task Update details </label>
                                                             <div class="form-group">
-                                                                <textarea name="taskupdates" maxlength="100" class="form-control" placeholder="Your Task Update Details"></textarea>
+                                                                <textarea name="taskupdates" maxlength="100" class="form-control" placeholder="Your Task Update Details" required=""></textarea>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Upload media (4 MB) </label>
-                                                                <input type="file" name="mediafile" class="form-control">
+                                                                <input type="file" name="mediafile" class="form-control file">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Media  Link (> 4 MB) </label>
@@ -24,7 +24,7 @@
                                                             </div>
 
                                                             <input type="hidden" name="taskID" id="opentaskID">
-                                                            <button type="button" class="btn btn-success waves-effect waves-light" > SUBMIT
+                                                            <button type="submit" class="btn btn-success waves-effect waves-light" > SUBMIT
                                                            </button>
                                                         </form>
                                                     </div>

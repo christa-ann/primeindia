@@ -55,22 +55,25 @@ class TaskUpdate{
       $updated_by_name=User::getNameForID($db,$row['updated_by']);
       
       if($userID==""){
-        $action="<a href=\"edit-task.php?temp={$row['id']}\" class=\"btn btn-warning waves-effect waves-light \"><i class=\"fa fa-edit\"></i></a>&nbsp;<button class=\"btn btn-danger waves-effect waves-light deleteTask\" id=\"{$row['id']}\" ><i class=\"fa fa-trash\"></i></button>";
+        $action="<a href=\"#\" class=\"btn btn-warning btn-sm waves-effect waves-light \"><i class=\"fa fa-edit\"></i></a>&nbsp;<button class=\"btn btn-danger btn-sm waves-effect waves-light deleteTask\" id=\"{$row['id']}\" ><i class=\"fa fa-trash\"></i></button>";
         $assigned_to="<select name=\"assign_to\" class=\"form-control assign\" id=\"task_{$row['id']}\">".User::getUsersListForSelected($db,$row['active_assigned_user'])."</select>";
-        $team_action="<a href=\"#\" class=\"btn btn-purple waves-effect waves-light btn-sm viewNote\" data-id=\"{$row['id']}\">View </a>";
+        
       }
       else{
         $action="";
         $assigned_to="<span class=\"badge badge-warning\">".User::getNameForID($db,$userID)."</span>";
-        $team_action="<a href=\"#\" class=\"btn btn-dark waves-effect waves-light btn-sm updateNote \" data-id=\"{$row['id']}\" >Update Notes</a><br><br><a href=\"#\" class=\"btn btn-purple waves-effect waves-light btn-sm viewNote\" data-id=\"{$row['id']}\">View Notes</a>";
+       
       }
+      $media_path=($row['media']!='')?HOST."/mediafiles/".$row['media']:"";
+      $media_display=($row['media']!='')?"<a href=\"{$media_path}\" target=\"_blank\">{$row['media']}</a>":"";
+      $media_link_display=($row['media_link']!='')?"<a href=\"{$row['media_link']}\" target=\"_blank\">View</a>":"No Links Attached";
       $list .= "
             <tr>
               <td>{$count}</td>
               
               <td style=\"white-space:break-spaces;\">{$row['updates']}</td>
-              <td>{$row['media']}</td>              
-              <td>{$row['media_link']}</td>
+              <td>{$media_display}</td>              
+              <td>{$media_link_display}</td>
               <td>{$row['added_on']}</td>
               <td>{$added_by_name}</td>
               <td>{$row['updated_on']}</td>
@@ -87,7 +90,29 @@ class TaskUpdate{
     $list .= "</table></div>";
     return $list;
   }
+   public static function add($db,$taskID,$updates,$media,$media_link,$added_on,$added_by) {
+          $active=0;
+          
+         try {
+    $query=$db->prepare("INSERT INTO task_updates(`taskID`, `updates`, `media`, `media_link`, `added_by`, `added_on`, `active`) VALUES  (:taskID,:updates,:media,:media_link,:added_by,:added_on,:active)");
 
+      } catch (PDOException $e){ die($e->getMessage()); return false;}
+      $query->bindParam(':taskID', $taskID); 
+     
+      $query->bindParam(':updates', $updates); 
+      $query->bindParam(':media', $media); 
+      $query->bindParam(':media_link', $media_link);
+      $query->bindParam(':added_on', $added_on); 
+      $query->bindParam(':added_by', $added_by);     
+      $query->bindParam(':active', $active);
+
+      if($query->execute()){
+        return true;
+      }else
+      {
+        return false;
+      }  
+    }
 }
 
 ?>

@@ -91,4 +91,42 @@ if($_POST['assignTask']){
 if($_POST['getTaskUpdates']){
 	echo TaskUpdate::getList($db,$_POST['taskID']);
 }
+if($_POST['submitTaskUpdates']){
+	//print_r($_FILES);print_r($_POST); exit();
+	$taskID=$_POST['taskID'];
+	$updates=$_POST['taskupdates'];
+	$media_link=$_POST['mediafilelink'];
+	if(isset($_FILES["media"]["name"])){
+		//if(in_array($_FILES["recognition_cert"]["type"], $type_allowed)){
+			$media_name = strtolower($_FILES["media"]["name"]);
+	        $media_tmp = $_FILES["media"]['tmp_name'];
+	        $ext  = explode('.',$media_name);// echo $product_image_name;
+	        $ext = end($ext); 
+	        if($media_name!=""){
+	            $thisdoc=rand()."_media{$taskID}".".".$ext;
+	            if(Image::uploadMedia($thisdoc,$media_tmp))
+	            {
+	                $media_doc=$thisdoc;//echo $thispdf;
+	            }
+	            else{
+	               $media_doc="";
+	            }
+	            
+
+	          }
+    }
+    else
+    {
+    	$media_doc="";
+    }
+    $added_by=User::getUserIDwithLogInID($db,$_SESSION['logInID']);
+	$added_on=date("Y-m-d H:i:s");
+	if(TaskUpdate::add($db,$taskID,$updates,$media_doc,$media_link,$added_on,$added_by)){
+		echo "success";
+	}
+	else
+	{
+		echo "error";
+	}
+}
 ?>
