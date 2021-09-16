@@ -55,7 +55,7 @@ class TaskUpdate{
       $updated_by_name=User::getNameForID($db,$row['updated_by']);
       
       if($userID==""){
-        $action="<a href=\"#\" class=\"btn btn-warning btn-sm waves-effect waves-light \"><i class=\"fa fa-edit\"></i></a>&nbsp;<button class=\"btn btn-danger btn-sm waves-effect waves-light deleteTask\" id=\"{$row['id']}\" ><i class=\"fa fa-trash\"></i></button>";
+        $action="<a href=\"#\" class=\"btn btn-warning btn-sm waves-effect waves-light editTaskUpdate \" data-id=\"{$row['id']}\"><i class=\"fa fa-edit\"></i></a>&nbsp;<button class=\"btn btn-danger btn-sm waves-effect waves-light deleteTaskUpdate\" data-id=\"{$row['id']}\" data-task=\"{$row['taskID']}\" ><i class=\"fa fa-trash\"></i></button>";
         $assigned_to="<select name=\"assign_to\" class=\"form-control assign\" id=\"task_{$row['id']}\">".User::getUsersListForSelected($db,$row['active_assigned_user'])."</select>";
         
       }
@@ -105,6 +105,58 @@ class TaskUpdate{
       $query->bindParam(':added_on', $added_on); 
       $query->bindParam(':added_by', $added_by);     
       $query->bindParam(':active', $active);
+
+      if($query->execute()){
+        return true;
+      }else
+      {
+        return false;
+      }  
+    }
+    public static function getSingleTaskUpdates($db,$taskUpdateID){
+    
+    try{
+
+     $query=$db->query("SELECT * FROM `task_updates` WHERE id='{$taskUpdateID}'  ");
+        
+      } 
+      catch (PDOException $e){ die($e->getMessage()); }
+    $row = $query->fetch(PDO::FETCH_ASSOC);
+    
+    return $row;
+      
+  }
+  public static function deactivate($db,$rowID) {
+    $active=1;
+      try {
+    $query=$db->prepare("UPDATE `task_updates` SET `active` = 1 WHERE `id` = :rowID"); 
+      } catch (PDOException $e){ die($e->getMessage()); }
+
+      // $query->bindParam(':active', $active);
+      $query->bindParam(':rowID', $rowID);
+
+        if($query->execute()){
+          return true;
+        }else
+        {
+          return false;
+        }  
+  }
+  public static function update($db,$rowID,$updates,$media_doc,$media_link,$updated_on,$updated_by) {          
+          
+         try {
+    $query=$db->prepare("UPDATE `task_updates` SET `updates`=:updates,`media`=:media_doc,`media_link`=:media_link,`updated_by`=:updated_by,`updated_on`=:updated_on where id=:rowID");
+    //return true;
+      } catch (PDOException $e){ die($e->getMessage()); return false;}
+      $query->bindParam(':updates', $updates); 
+     
+      $query->bindParam(':media_doc', $media_doc); 
+      $query->bindParam(':media_link', $media_link); 
+     
+      $query->bindParam(':updated_on', $updated_on); 
+      $query->bindParam(':updated_by', $updated_by);
+      
+      $query->bindParam(':rowID', $rowID);
 
       if($query->execute()){
         return true;

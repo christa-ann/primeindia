@@ -16,5 +16,22 @@ class Image{
 	    	}
 	    
 	}
+	public static function deleteMediaDoc($db,$img,$rowID,$field){
+	    	//imgpath is img name
+	    	//echo ROOT."/products/".$imgpath;
+		//echo file_exists(ROOT."/assetsdoc/".$img);
+	    	if(file_exists(ROOT."/mediafiles/".$img)){
+	            
+	            @unlink(ROOT."/mediafiles/".$img); 
+	            
+	            
+	            //echo "UPDATE task_updates SET {$field}='' WHERE id='{$rowID}' ";
+	            try {
+		        $db->query("UPDATE task_updates SET {$field}='' WHERE id='{$rowID}' ");
+		            return true;
+		            } catch (PDOException $e){ return $e->getMessage(); }
+	        }
+
+	    }
 }
 ?>

@@ -129,4 +129,78 @@ if($_POST['submitTaskUpdates']){
 		echo "error";
 	}
 }
+
+if($_POST['getSingleTaskUpdates']){
+	//print_r($_POST);
+	$noteData=TaskUpdate::getSingleTaskUpdates($db,$_POST['taskUpdateID']);
+	$json=json_encode($noteData);
+		echo $json;
+}
+if($_POST['deleteTaskUpdate']){
+	//print_r($_POST);
+	if(TaskUpdate::deactivate($db,$_POST['taskUpdateID'])){
+		echo TaskUpdate::getList($db,$_POST['taskID']);
+	}
+	else
+	{
+		echo "error";
+	}
+	
+}
+if($_POST['editTaskUpdate']){
+	//print_r($_FILES);
+	//print_r($_POST); //exit();
+	$rowID=$_POST['rowID'];
+	$updates=$_POST['taskupdates'];
+	$media_link=$_POST['mediafilelink'];
+	if(isset($_FILES["media"]["name"])){
+		//if(in_array($_FILES["recognition_cert"]["type"], $type_allowed)){
+			$media_name = strtolower($_FILES["media"]["name"]);
+	        $media_tmp = $_FILES["media"]['tmp_name'];
+	        $ext  = explode('.',$media_name);// echo $product_image_name;
+	        $ext = end($ext); 
+	        if($media_name!=""){
+	            $thisdoc=rand()."_media{$taskID}".".".$ext;
+	            if(Image::uploadMedia($thisdoc,$media_tmp))
+	            {
+	                $media_doc=$thisdoc;//echo $thispdf;
+	            }
+	            else{
+	               $media_doc=$_POST['media_current'];
+	            }
+	            
+
+	        }
+    }
+    else
+    {
+    	$media_doc=$_POST['media_current'];
+    }
+    
+    $updated_by=User::getUserIDwithLogInID($db,$_SESSION['logInID']);
+	$updated_on=date("Y-m-d H:i:s");
+	$taskID=$_POST['taskID'];
+	if(TaskUpdate::update($db,$rowID,$updates,$media_doc,$media_link,$updated_on,$updated_by)){
+		echo TaskUpdate::getList($db,$_POST['taskID']);
+	}
+	else
+	{
+		echo "error";
+	}
+}
+if(isset($_POST['deleteMediaDoc'])) {
+
+
+	if(Image::deleteMediaDoc($db,$_POST['img'],$_POST['rowID'],'media')){
+
+	
+		echo TaskUpdate::getList($db,$_POST['taskID']);
+	}
+	else
+	{
+		
+		echo "error";
+	}
+	
+}
 ?>
