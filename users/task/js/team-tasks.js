@@ -92,7 +92,7 @@
                         contentType: false,
                         processData: false,
                         success: function(res){
-                            console.log(res);
+                            //console.log(res);
                             if(res=="success"){
                                 swal("Updated Added");
                                 $(".modal #taskupdate")[0].reset();
@@ -215,7 +215,7 @@
                         contentType: false,
                         processData: false,
                         success: function(res){
-                            console.log(res);
+                           // console.log(res);
                             if(res!="error"){
                                 swal("Task Updated. ").then(function(){
                                     $("#updateEditNoteModal").modal('hide');
