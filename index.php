@@ -54,7 +54,7 @@
                             <div class="form-group m-t-10 mb-0 row">
                                 <div class="col-12 m-t-20">
                                     <!-- <a href="pages-recoverpw.html" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a> -->
-                                   <a href="new-member.php" class="font-500 font-14 text-primary font-secondary"> <i class="mdi mdi-lock"></i> Create you account. </a> 
+                                  <!--  <a href="new-member.php" class="font-500 font-14 text-primary font-secondary"> <i class="mdi mdi-lock"></i> Create your account. </a>  -->
                <!-- <p>© <?php //echo date("Y"); ?> DyanDni. Developed by <a href="https://rejola.com/">REJOLA IT SERVICES</a></p>  --> 
                                 </div>
                             </div>
