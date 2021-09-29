@@ -3,18 +3,18 @@ class Email {
 	
 	public static function sendEmailID() {
 		//return 'thomas@BusinessSuccessPartner.com';		//future bspzone.com ??
-		return 'thomas@rejola.com';
+		return 'mail@rejola.com';
 	}
 	
 	
 	public static function sendEmailName() {
-		return 'Dyadni Team';
+		return 'Software Team';
 	}
 	
 	public static function sendEmailPassword() {
 		//return 'BSP@123';'lv@f6o?wONpu'
 		//return 'jadmin_1234';
-		return 'lv@f6o?wONpu';
+		return 'gk)4duXc!Hp(';
 	}
 	
 	
@@ -22,7 +22,7 @@ class Email {
 		return "
 					<p>
 						Thank you and regards,<br>
-						Dyadni Team
+						Software Team
 						
 					</p>
 				";
