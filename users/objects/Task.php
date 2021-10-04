@@ -99,7 +99,7 @@ class Task{
 						<th>Sl No</th>
 						<th>Name</th>
 						<th>Description</th>
-						<th >TAT (days)</th>
+						<th >TAT (hours)</th>
 						<th>Stage </th>	
 						<th>Added on </th>
 						<th>Added by </th>
