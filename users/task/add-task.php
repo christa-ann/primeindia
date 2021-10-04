@@ -70,7 +70,7 @@ if($_SESSION['loggedIn'] != 1) {
                     <td><input type="text" class="form-control" name="description" required=""></td>
                 </tr>
                  <tr>
-                    <td>Turn around Time (TAT) (in days)</td>
+                    <td>Turn around Time (TAT) (in hours)</td>
                     <td><input type="number" class="form-control" name="tat" required="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></td>
                 </tr>
                 <!-- <tr>
