@@ -69,15 +69,15 @@ if($_SESSION['loggedIn'] != 1) {
                     <div class="col-md-3 col-xl-3">
                         <div class="card text-center m-b-30">
                             <div class="mb-2 card-body text-muted">
-                                <h3 class="text-danger"><?php ?></h3>
-                               Total Projects
+                                <h3 class="text-danger"><?php  echo Task::totalTasks($db,date('Y-m-d'),'');?></h3>
+                               Today's Tasks
                             </div>
                         </div>
                     </div> 
                     <div class="col-md-3 col-xl-3">
                         <div class="card text-center m-b-30">
                             <div class="mb-2 card-body text-muted">
-                                <h3 class="text-purple"><?php  ?></h3>
+                                <h3 class="text-purple"><?php  echo Task::totalTasks($db,'','');?></h3>
                                 Total Tasks
                             </div>
                         </div>
@@ -85,7 +85,7 @@ if($_SESSION['loggedIn'] != 1) {
                      <div class="col-md-3 col-xl-3">
                         <div class="card text-center m-b-30">
                             <div class="mb-2 card-body text-muted">
-                                <h3 class="text-primary"><?php ?></h3>
+                                <h3 class="text-primary"><?php  echo Task::totalTasks($db,'',3);?></h3>
                                 Completed Tasks
                             </div>
                         </div>
@@ -99,21 +99,27 @@ if($_SESSION['loggedIn'] != 1) {
                     <div class="col-xl-6">
                         <div class="card m-b-30">
                             <div class="card-body">
-                                <!-- <h4 class="mt-0 header-title">Work Flow of the App</h4>
+                                 <h4 class="mt-0 header-title">Work Flow of the Application</h4>
                                     <ol class="activity-feed mb-0">
                                         <li class="feed-item">
-                                            <span class="date"><b>Sales Person</b></span>
-                                            <span class="activity-text">Adding/Updating order details.</span>
+                                            <span class="date"><b>Project Manager/Admin</b></span>
+                                            <span class="activity-text">Adding/Updating task details.</span><br>
+                                            <span class="activity-text">Assigning task to user.</span>
                                         </li>
+                                        
                                         <li class="feed-item">
-                                            <span class="date"><b>Finance Clerk</b></span>
-                                            <span class="activity-text">Adding/Updating Finance details section of view order.</span>
+                                            <span class="date"> <b>User</b></span>
+                                            <span class="activity-text">View Tasks assigned to them.</span> <br>
+                                            <span class="activity-text">Update the progress of each task with the media file and / or media link.</span>
                                         </li>
+                                        
                                         <li class="feed-item">
-                                            <span class="date"> <b>Finance Manager</b></span>
-                                            <span class="activity-text">Approve Finance details entered by the finance clerk.</span>
+                                            <span class="date"><b>Project Manager/Admin</b></span>
+                                            <span class="activity-text">View the task updates given by user.</span> <br>
+                                            <span class="activity-text">Mark task as completed/on-hold</span>
                                         </li>
-                                    </ol> -->
+                                        
+                                    </ol> 
                                  <!--<div class="row text-center m-t-20">
                                     <div class="col-6"><li class="list-group-item"><b>Finance Manager</b></li>
                                         <li>Approve Finance details entered by the finance clerk.</li>
@@ -134,28 +140,7 @@ if($_SESSION['loggedIn'] != 1) {
                     <div class="col-xl-6">
                         <div class="card m-b-30">
                             <div class="card-body">
-                                 <!-- <h4 class="mt-0 header-title">Work Flow of the Software</h4>
-                                    <ol class="activity-feed mb-0">
-                                        <li class="feed-item">
-                                            <span class="date"><b>Finance Clerk</b></span>
-                                            <span class="activity-text">Adding/Updating Finance details section of view order.</span>
-                                        </li>
-                                        <li class="feed-item">
-                                            <span class="date"> <b>Finance Manager</b></span>
-                                            <span class="activity-text">Approve Finance details entered by the finance clerk.</span>
-
-                                        </li>
-                                       
-                                        <li class="feed-item">
-                                             <span class="date"><b>Warehouse Manager</b> </span>
-                                             <span class="activity-text">After approval of finance details by Finance Manager, generate the order number.</span>
-                                            <span class="activity-text">Add/Update Invoice No, Product Indent No and  Tendative Despatch date (for each product wise).</span>
-                                        </li>
-                                        <li class="feed-item">
-                                            <span class="date"><b>Warehouse In Charge</b> </span>
-                                            <span class="activity-text">Add/Update for each product the Despatch Date, DC number, Cartage Allocation (vehicle), Handling Charges.</span>
-                                        </li>
-                                    </ol> -->
+                                 
                                 <!--<div class="row text-center m-t-20">
                                     <div class="col-4">
                                         <h5 class="">56241</h5>
@@ -169,9 +154,9 @@ if($_SESSION['loggedIn'] != 1) {
                                         <h5 class="">23651</h5>
                                         <p class="text-muted font-14">Last Month</p>
                                     </div>
-                                </div>
+                                </div>-->
 
-                                <div id="morris-area-example" class="dash-chart"></div> -->
+                                <div id="graph-example" class="dash-chart"></div> 
                             </div>
                         </div>
                     </div>
@@ -342,6 +327,32 @@ if($_SESSION['loggedIn'] != 1) {
 
 
        <?php include(ROOT.'/theme/js-links.php'); ?>
+       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['User', 'Tasks Count '],
+          <?php echo TaskAssign::TaskbyUser($db); ?>
+          // ['Work',     11],
+          // ['Eat',      2],
+          // ['Commute',  2],
+          // ['Watch TV', 2],
+          // ['Sleep',    7]
+        ]);
 
+        var options = {
+          title: 'Tasks Assigned Overview',
+          vAxis: {title: 'Tasks Count'},
+          hAxis: {title: 'User Name'},
+          // is3D: true,
+          // colors: ['blue', 'red', 'green', 'black']
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('graph-example'));
+        chart.draw(data, options);
+      }
+    </script>
     </body>
 </html>

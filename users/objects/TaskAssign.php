@@ -47,5 +47,17 @@ class TaskAssign
         return false;
       }  
     }
+    public static function TaskbyUser($db) {
+      try {
+    $query = $db->query("SELECT count(*) as count,userID FROM `task_assign` group by userID");
+      } catch (PDOException $e){ die($e->getMessage()); }
+      $list="";
+    while($row = $query->fetch(PDO::FETCH_ASSOC)){
+      $userName=User::getNameForID($db,$row['userID']);
+      
+      $list.="['{$userName}',   {$row['count']}],";
+    }
+    return $list;
+  }
 }
 ?>

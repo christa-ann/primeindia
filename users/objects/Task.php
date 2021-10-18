@@ -201,6 +201,15 @@ class Task{
 	        return false;
 	      }  
 	}
+	public static function totalTasks($db,$date,$stage) {
+		$stage_condn=($stage!='')?"and stage='{$stage}'":"";
+		$date_condn=($date!='')?"and added_on  LIKE '{$date}%'":"";
+			try {
+		$query = $db->query("SELECT count(*) as count FROM `task` WHERE `active` = 0 {$stage_condn} {$date_condn}");
+			} catch (PDOException $e){ die($e->getMessage()); }
+		$row = $query->fetch(PDO::FETCH_ASSOC);
+		return $row['count'];
+	}
 	
 }
 

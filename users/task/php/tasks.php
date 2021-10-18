@@ -3,7 +3,7 @@ include('../../includes/init.php');
 if(isset($_POST['addTask'])) {
 	//print_r($_POST); exit();
 	$added_by=User::getUserIDwithLogInID($db,$_SESSION['logInID']);
-	$added_on=date("Y-m-d");
+	$added_on=date("Y-m-d H:i:s");
 	$name=$_POST['name'];
 	$description=$_POST['description'];
 	$tat=$_POST['tat'];

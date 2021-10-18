@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     //Buttons examples
     var table = $('#datatable-buttons').DataTable({
-
+        
     	responsive: {
             details: {
                 type: 'column',
@@ -22,7 +22,7 @@ $(document).ready(function() {
         } ],
         order: [ 0, 'asc' ],
         // lengthChange: false,
-        buttons: ['copy', 'excel', 'pdf']
+        buttons: ['copy', 'excel', 'pdf','colvis']
     });
 
     table.buttons().container()
