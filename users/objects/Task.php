@@ -97,8 +97,9 @@ class Task{
                             <table id=\"datatable-buttons\" class=\"table table-striped table-bordered dt-responsive nowrap\" style=\"border-collapse: collapse; border-spacing: 0; width: 100%;\"><thead>
 					<tr>
 						<th>Sl No</th>
-						<th>Name</th>
-						<th>Description</th>
+						<th style=\"background-color:yellow;\">Assign/Move to</th>
+						<th>Task Name</th>
+						<th>Task Description</th>
 						<th >TAT (hours)</th>
 						<th>Stage </th>	
 						<th>Added on </th>
@@ -107,7 +108,7 @@ class Task{
 						<th>Updated by </th>
 						<th>Completed On </th>
 						<th>Actions (By PM)</th>
-						<th style=\"background-color:yellow;\">Assign/Move to</th>
+						
 						<th >Team Updates</th>
 					</tr></thead>
 				";$count=1;
@@ -131,6 +132,7 @@ class Task{
 			$list .= "
 						<tr>
 							<td>{$count}</td>
+							<td style=\"background-color:yellow;\">{$assigned_to}</td>
 							<td>{$row['name']} </td>
 							<td style=\"white-space:break-spaces;\">{$row['description']}</td>
 							<td style=\"width:40px;\">{$row['tat']}</td>							
@@ -141,7 +143,7 @@ class Task{
 							<td>{$updated_by_name}</td>
 							<td>{$row['completion_date']}</td>
 							<td style=\"width:150px;\"> {$action} </td>
-							<td style=\"background-color:yellow;\">{$assigned_to}</td>
+							
 							<td>{$team_action}</td>
 						</tr>
 					";
@@ -186,7 +188,7 @@ class Task{
 	      }  
 	}
 	public static function updateCompletion($db,$taskID) {
-		$completion_date=date("Y-m-d");
+		$completion_date=date("Y-m-d H:i:s");
 		try{
 		$query=$db->prepare("UPDATE `task` SET `completion_date` = :completion_date WHERE `id` = :taskID"); 
 			} catch (PDOException $e){ die($e->getMessage()); }
