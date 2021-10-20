@@ -104,14 +104,11 @@ class Task{
 						<th>Task Description</th>
 						<th >TAT (hours)</th>
 						<th>Stage </th>	
+						<th>Completed On </th>
 						<th>Added on </th>
 						<th>Added by </th>
 						<th>Updated on </th>
 						<th>Updated by </th>
-						<th>Completed On </th>
-						
-						
-						
 					</tr></thead>
 				";$count=1;
 		while($row = $query->fetch(PDO::FETCH_ASSOC)) {
@@ -141,14 +138,11 @@ class Task{
 							<td style=\"white-space:break-spaces;\">{$row['description']}</td>
 							<td style=\"width:40px;\">{$row['tat']}</td>							
 							<td>{$stage}</td>
+							<td>{$row['completion_date']}</td>
 							<td>{$row['added_on']}</td>
 							<td>{$added_by_name}</td>
 							<td>{$row['updated_on']}</td>
 							<td>{$updated_by_name}</td>
-							<td>{$row['completion_date']}</td>
-							
-							
-							
 						</tr>
 					";
 			$count++;
