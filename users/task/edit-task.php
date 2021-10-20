@@ -64,16 +64,18 @@ $task_detail=new Task($db,$taskID);
 
             <table class="table">
                 <tr>
-                    <td>Name</td>
+                    <td>Task Name</td>
                     <td><input type="text" class="form-control" name="name" required="" value="<?php echo $task_detail->name; ?>"></td>
                 </tr>
                  <tr>
-                    <td>Description</td>
+                    <td>Task Description</td>
                     <td><input type="text" class="form-control" name="description" required="" value="<?php echo $task_detail->description; ?>"></td>
                 </tr>
                  <tr>
                     <td>Turn around Time (TAT) (in days)</td>
-                    <td><input type="number" class="form-control" name="tat" required="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="<?php echo $task_detail->tat; ?>"></td>
+                    <td><input class="form-control" type="datetime-local" name="tat" id="example-datetime-local-input" value="<?php echo $task_detail->tat; ?>">
+
+                        <!-- <input type="number" class="form-control" name="tat" required="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="<?php echo $task_detail->tat; ?>"> --></td>
                 </tr>
                 <tr>
                     <td>Stage <Br> (Completion date is captured when stage is selected to completed)</td>

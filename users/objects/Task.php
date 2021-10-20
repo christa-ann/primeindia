@@ -102,7 +102,7 @@ class Task{
 						<th >Team Updates</th>
 						<th>Task Name</th>
 						<th>Task Description</th>
-						<th >TAT (hours)</th>
+						<th>To completed by </th>
 						<th>Stage </th>	
 						<th>Completed On </th>
 						<th>Added on </th>

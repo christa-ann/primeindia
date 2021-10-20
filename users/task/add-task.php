@@ -62,16 +62,18 @@ if($_SESSION['loggedIn'] != 1) {
 
             <table class="table">
                 <tr>
-                    <td>Name</td>
+                    <td>Task Name</td>
                     <td><input type="text" class="form-control" name="name" required=""></td>
                 </tr>
                  <tr>
-                    <td>Description</td>
+                    <td>Task Description</td>
                     <td><input type="text" class="form-control" name="description" required=""></td>
                 </tr>
                  <tr>
-                    <td>Turn around Time (TAT) (in hours)</td>
-                    <td><input type="number" class="form-control" name="tat" required="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></td>
+                    <td>To be completed  by</td>
+                    <td><input class="form-control" type="datetime-local" name="tat" id="example-datetime-local-input">
+                        <!-- <input type="number" class="form-control" name="tat" required="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> -->
+                    </td>
                 </tr>
                 <!-- <tr>
                     <td>Assign To</td>
