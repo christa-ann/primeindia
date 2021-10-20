@@ -98,6 +98,8 @@ class Task{
 					<tr>
 						<th>Sl No</th>
 						<th style=\"background-color:yellow;\">Assign/Move to</th>
+						<th>Actions (By PM)</th>
+						<th >Team Updates</th>
 						<th>Task Name</th>
 						<th>Task Description</th>
 						<th >TAT (hours)</th>
@@ -107,9 +109,9 @@ class Task{
 						<th>Updated on </th>
 						<th>Updated by </th>
 						<th>Completed On </th>
-						<th>Actions (By PM)</th>
 						
-						<th >Team Updates</th>
+						
+						
 					</tr></thead>
 				";$count=1;
 		while($row = $query->fetch(PDO::FETCH_ASSOC)) {
@@ -133,6 +135,8 @@ class Task{
 						<tr>
 							<td>{$count}</td>
 							<td style=\"background-color:yellow;\">{$assigned_to}</td>
+							<td style=\"width:150px;\"> {$action} </td>
+							<td>{$team_action}</td>
 							<td>{$row['name']} </td>
 							<td style=\"white-space:break-spaces;\">{$row['description']}</td>
 							<td style=\"width:40px;\">{$row['tat']}</td>							
@@ -142,9 +146,9 @@ class Task{
 							<td>{$row['updated_on']}</td>
 							<td>{$updated_by_name}</td>
 							<td>{$row['completion_date']}</td>
-							<td style=\"width:150px;\"> {$action} </td>
 							
-							<td>{$team_action}</td>
+							
+							
 						</tr>
 					";
 			$count++;
