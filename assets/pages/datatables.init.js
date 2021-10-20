@@ -22,13 +22,14 @@ $(document).ready(function() {
         } ],
         order: [ 0, 'asc' ],
         // lengthChange: false,
-        buttons: ['copy', 'excel', 
+        dom: 'Bfrtip',
+        buttons: ['copy', 'excel',  'colvis',
             {
                 extend: 'pdf',
                 exportOptions: {
                     columns: [ 0, 4, 5,6,7,8,9 ]
                 }
-            },'colvis',]
+            }]
     });
 
     table.buttons().container()

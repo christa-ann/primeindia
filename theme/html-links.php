@@ -18,8 +18,8 @@
         <link href="<?php echo HOST; ?>/assets/css/icons.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo HOST; ?>/assets/css/style.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo HOST; ?>/assets/css/itoast.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo HOST; ?>/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo HOST; ?>/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-     <!--  <link href="<?php echo HOST; ?>/assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" /> -->
+        <link href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+     <!--  <link href="<?php echo HOST; ?>/assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" /> <?php echo HOST; ?>/assets/plugins/datatables/buttons.bootstrap4.min.css-->
          
          <link src="<?php echo  HOST; ?>/assets/plugins/sweet=alert2/sweetalert2.min.css" />
