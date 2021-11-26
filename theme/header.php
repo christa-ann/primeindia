@@ -47,7 +47,7 @@ if(User::rights($db,$_SESSION['logInID']) >= 20  ) {
         $tasksMenu.="<li><a href=\"".HOST."/users/task/add-task.php\"><span>Add Task</span></a></li>";
     //$tasksMenu.="<li><a href=\"#\"><span>Assign Task</span></a></li>";
         $tasksMenu.="<li><a href=\"".HOST."/users/task/manage-tasks.php\"><span>Manage Tasks</span></a></li>";        
-       
+       $tasksMenu.="<li><a href=\"".HOST."/users/task/tasks-report.php\"><span>Report</span></a></li>";
     }
     else{
         $tasksMenu.="<li><a href=\"".HOST."/users/task/team-tasks.php\"><span>View/Update Tasks</span></a></li>"; 
