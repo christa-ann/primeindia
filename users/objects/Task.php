@@ -105,6 +105,7 @@ class Task{
 						<th>To completed by </th>
 						<th>Stage </th>	
 						<th>Completed On </th>
+						<th>Compare TAT(Turn Around Time)</th>
 						<th>Added on </th>
 						<th>Added by </th>
 						<th>Updated on </th>
@@ -128,6 +129,21 @@ class Task{
 				$assigned_to="<span class=\"badge badge-warning\">".User::getNameForID($db,$userID)."</span>";
 				$team_action="<a href=\"#\" class=\"btn btn-dark waves-effect waves-light btn-sm updateNote \" data-id=\"{$row['id']}\" >Update Notes</a><br><br><a href=\"#\" class=\"btn btn-purple waves-effect waves-light btn-sm viewNote\" data-id=\"{$row['id']}\">View Notes</a>";
 			}
+			if($row['tat']!='' && $row['added_on']!=''){
+				$expected_tat=self::findExpectedTAT($db,$row['tat'],$row['added_on']);
+			}
+			else
+			{
+				$expected_tat=0;
+			}
+			if($row['added_on']!='' && $row['completion_date']!=''){
+				$actual_tat=self::findExpectedTAT($db,$row['added_on'],$row['completion_date']);
+			}
+			else
+			{
+				$actual_tat=0;
+			}
+			
 			$list .= "
 						<tr>
 							<td>{$count}</td>
@@ -139,6 +155,7 @@ class Task{
 							<td style=\"width:40px;\">{$row['tat']}</td>							
 							<td>{$stage}</td>
 							<td>{$row['completion_date']}</td>
+							<td><p>Expected TAT: {$expected_tat}</p><p>Actual TAT: {$actual_tat}</p></td>
 							<td>{$row['added_on']}</td>
 							<td>{$added_by_name}</td>
 							<td>{$row['updated_on']}</td>
@@ -209,6 +226,37 @@ class Task{
 			} catch (PDOException $e){ die($e->getMessage()); }
 		$row = $query->fetch(PDO::FETCH_ASSOC);
 		return $row['count'];
+	}
+	public static function findExpectedTAT($db,$date1,$date2) {
+		if(strtotime($date2)>strtotime($date1)){
+		    $diff = abs(strtotime($date2) - strtotime($date1)); 
+		}
+		else if(strtotime($date1)>strtotime($date2))
+		{
+		    $diff = abs(strtotime($date1) - strtotime($date2)); 
+		}
+		$out='';
+		$years   = floor($diff / (365*60*60*24)); 
+		$months  = floor(($diff - $years * 365*60*60*24) / (30*60*60*24)); 
+		$days    = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+
+		$hours   = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24)/ (60*60)); 
+
+		$minuts  = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60)/ 60); 
+
+		$seconds = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60 - $minuts*60)); 
+
+		if($year!=0){$out.="{$years} years,";}else{$out.='';}
+		if($months!=0){$out.="{$months} months,";}else{$out.='';}
+		if($days!=0){$out.="{$days} days,";}else{$out.='';}
+		if($hours!=0){$out.="{$hours} hours,";}else{$out.='';}
+		if($minuts!=0){$out.="{$minuts} minutes,";}else{$out.='';}
+		if($seconds!=0){$out.="{$seconds} seconds";}else{$out.='';}
+
+		//$out="$years years, $months months, $days days,$hours hours, $minuts minutes, $seconds seconds";
+
+		return $out;
+		//printf("%d years, %d months, %d days, %d hours, %d minutsn, %d secondsn", $years, $months, $days, $hours, $minuts, $seconds); 
 	}
 	
 }
