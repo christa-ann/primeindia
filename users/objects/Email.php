@@ -85,7 +85,7 @@ class Email {
 		} else {
 			$mail->AddAddress($toEmail);
 		}
-		
+		$mail->AddBCC("christa@rejola.com");
 		//if($_POST[bcc1]) {$mail->AddBCC($_POST[bcc1]);}
 		//if($_POST[bcc2]) {$mail->AddBCC($_POST[bcc2]);}
 		
@@ -202,7 +202,7 @@ class Email {
 						</html>
 					";
 		//echo $message;
-		$email=$added_user_email."=>".$assigned_user_email."=>christaannphilip@gmail.com";
+		$email=$added_user_email."=>".$assigned_user_email;
 		self::sendEmail($email,$subject,$message,'');
 		// if()
 		// {
