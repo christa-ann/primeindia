@@ -177,7 +177,7 @@ class Email {
 		$signature = self::sendEmailSignature();
 		$task_name=Task::getSingleTask($db,$taskID,'name');
 		$task_description=Task::getSingleTask($db,$taskID,'description');
-		$completion_date=Task::getSingleTask($db,$taskID,'completion_date');
+		$completion_date=Task::getSingleTask($db,$taskID,'tat');
 		$completion_date_disp=date("d M Y H:i:s",strtotime($completion_date));
 
 		$added_user_email=User::getLoginIDForID($db,Task::getSingleTask($db,$taskID,'added_by'));
