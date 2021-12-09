@@ -45,6 +45,14 @@ class User {
 		$row = $query->fetch(PDO::FETCH_ASSOC);
 		return $row['name'];
 	}
+	public static function getLoginIDForID($db,$userID) {
+			
+			try {
+		$query = $db->query("SELECT `loginid` FROM `users` WHERE `id` = '{$userID}'");
+			} catch (PDOException $e){ die($e->getMessage()); }
+		$row = $query->fetch(PDO::FETCH_ASSOC);
+		return $row['loginid'];
+	}
 	public static function getUserType($db,$logInID) {
 			try {
 		$query = $db->query("SELECT `user_type_id` FROM `users` WHERE `loginid` = '{$logInID}'");

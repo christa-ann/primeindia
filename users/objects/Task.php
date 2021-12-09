@@ -360,6 +360,17 @@ class Task{
 		$list .= "</table></div>";
 		return $list;
 	}
+	public static function getSingleTask($db,$taskID,$field) {
+    	
+			try {		
+		
+		$query = $db->query("SELECT {$field} FROM task where active=0 and id='{$taskID}' ");
+
+			} catch (PDOException $e){ die($e->getMessage()); }
+
+		$row = $query->fetch(PDO::FETCH_ASSOC);
+		return $row[$field];
+	}
 	
 }
 

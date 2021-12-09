@@ -111,7 +111,7 @@ class Email {
 	
 	
 	public static function newMemberEmail($email,$securityString) {
-		$subject = " Dyadni: New Member";
+		$subject = " New Member";
 		$signature = self::sendEmailSignature();
 		$message = "
 						<html>
@@ -142,7 +142,7 @@ class Email {
 	}
 	
 	public static function resetPasswordEmail($email,$securityString) {
-		$subject = "Kaiyaan Customer : Reset Your Password";
+		$subject = "User : Reset Your Password";
 		$signature = self::sendEmailSignature();
 		$message = "
 						<html>
@@ -169,8 +169,53 @@ class Email {
 			return false;
 		}
 	}
+
 	
 	
+	public static function notifyTaskAssign($db,$taskID) {
+		$subject = " Notification: Task Assigned";
+		$signature = self::sendEmailSignature();
+		$task_name=Task::getSingleTask($db,$taskID,'name');
+		$task_description=Task::getSingleTask($db,$taskID,'description');
+		$completion_date=Task::getSingleTask($db,$taskID,'completion_date');
+		$completion_date_disp=date("d M Y H:i:s",strtotime($completion_date));
+
+		$added_user_email=User::getLoginIDForID($db,Task::getSingleTask($db,$taskID,'added_by'));
+		$added_user_name=User::getNameForID($db,Task::getSingleTask($db,$taskID,'added_by'));
+		$assigned_user_email=User::getLoginIDForID($db,Task::getSingleTask($db,$taskID,'active_assigned_user'));
+		$assigned_user_name=User::getNameForID($db,Task::getSingleTask($db,$taskID,'active_assigned_user'));
+		$message = "
+						<html>
+							<head><title>Task Assigned</title></head>
+							<body style=\"font-family:Verdana;\">
+								<h3>Hi</h3>
+								<p>{$added_user_name} has assigned the following task  to {$assigned_user_name}.</p>
+								<p>Task Details</p>
+								<p>Task Name: {$task_name}</p>
+								<p>Task Description: {$task_description}</p>
+								<p>To be completed by: {$completion_date_disp}</p>
+								<p>Software Link: <a href=\"".HOST."/index.php\">".HOST."/index.php</a></p>
+								<p>If the link is not working, please copy and paste the same in your browser and try again.</p>
+								<p>Please feel free to contact us for any further assistance.</p>
+								{$signature}								
+							</body>
+						</html>
+					";
+		//echo $message;
+		$email=$added_user_email."=>".$assigned_user_email."=>christaannphilip@gmail.com";
+		self::sendEmail($email,$subject,$message,'');
+		// if()
+		// {
+		// 	echo "send";
+		// 	return true;
+		// }
+		// else
+		// {
+		// 	echo "error";
+		// 	return false;
+		// }
+
+	}
 	
 	
 	

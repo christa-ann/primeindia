@@ -2,5 +2,6 @@
 
 //init_set('display_error',1);
 //echo mail("christaannphilip@gmail.com","hi","test");
-echo Email::newMemberEmail("christaannphilip@gmail.com","kahsgajghdajkshdgksajh");
+//echo Email::newMemberEmail("christaannphilip@gmail.com","kahsgajghdajkshdgksajh");
+Email::notifyTaskAssign($db,'5');
 ?>

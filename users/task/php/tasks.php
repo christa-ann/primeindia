@@ -81,6 +81,7 @@ if($_POST['assignTask']){
 		{
 			TaskAssign::add($db,$taskID,$userID,$assigned_on,$assigned_by);
 		}
+		Email::notifyTaskAssign($db,$taskID);
 		echo "Assigned";
 	}
 	else
