@@ -216,7 +216,50 @@ class Email {
 		// }
 
 	}
-	
+	public static function notifyTaskComplete($db,$taskID) {
+		$subject = " Notification: Task Completion";
+		$signature = self::sendEmailSignature();
+		$task_name=Task::getSingleTask($db,$taskID,'name');
+		$task_description=Task::getSingleTask($db,$taskID,'description');
+		$completion_date=Task::getSingleTask($db,$taskID,'tat');
+		$completion_date_disp=date("d M Y H:i:s",strtotime($completion_date));
+
+		$added_user_email=User::getLoginIDForID($db,Task::getSingleTask($db,$taskID,'added_by'));
+		$added_user_name=User::getNameForID($db,Task::getSingleTask($db,$taskID,'added_by'));
+		$assigned_user_email=User::getLoginIDForID($db,Task::getSingleTask($db,$taskID,'active_assigned_user'));
+		$assigned_user_name=User::getNameForID($db,Task::getSingleTask($db,$taskID,'active_assigned_user'));
+		$message = "
+						<html>
+							<head><title>Task Assigned</title></head>
+							<body style=\"font-family:Verdana;\">
+								<h3>Hi</h3>
+								<p>{$assigned_user_name} has completed the following task.</p>
+								<p>Task Details</p>
+								<p>Task Name: {$task_name}</p>
+								<p>Task Description: {$task_description}</p>
+								<p>To be completed by: {$completion_date_disp}</p>
+								<p>Software Link: <a href=\"".HOST."/index.php\">".HOST."/index.php</a></p>
+								<p>If the link is not working, please copy and paste the same in your browser and try again.</p>
+								<p>Please feel free to contact us for any further assistance.</p>
+								{$signature}								
+							</body>
+						</html>
+					";
+		//echo $message;
+		$email=$added_user_email."=>".$assigned_user_email;
+		self::sendEmail($email,$subject,$message,'');
+		// if()
+		// {
+		// 	echo "send";
+		// 	return true;
+		// }
+		// else
+		// {
+		// 	echo "error";
+		// 	return false;
+		// }
+
+	}
 	
 	
 	
