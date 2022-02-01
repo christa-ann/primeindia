@@ -1,4 +1,8 @@
-<?php include('users/includes/init.php'); ?>
+<?php include('users/includes/init.php'); 
+
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,7 +29,9 @@
 
                     <div class="p-3">
                         <h4 class="text-muted font-18 m-b-5 text-center">Welcome Back !</h4>
+
                         <p class="text-muted text-center">Sign in to continue to Prime India.</p>
+                        <?php echo Subscription::warningExpiry($db); ?>
                         <?php echo $_SESSION['logInMessage']; $_SESSION['logInMessage']=""; ?>
                         <form class="form-horizontal m-t-30" action="users/users/login-check.php" method="post">
 
