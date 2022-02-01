@@ -1,5 +1,6 @@
 
 <?php
+Subscription::warningExpiry($db); 
 $userName=User:: getName($db,$_SESSION['logInID']);
 $userType=User::getUserType($db,$_SESSION['logInID']);
 $userID=User::getUserIDwithLogInID($db,$_SESSION['logInID']);

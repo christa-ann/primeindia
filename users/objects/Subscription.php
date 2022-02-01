@@ -57,9 +57,9 @@ class Subscription {
 			header("Location: ".HOST."/expired.php");
 			exit();
 		}
-		if($days <= 15) {
-			return "<h3 style=\"color:red;\">This subscription will end in {$days} days.  Kindly renew to continue using all the modules.</h3>";
-		}
+		// if($days <= 15) {
+		// 	return "<h3 style=\"color:red;\">This subscription will end in {$days} days.  Kindly renew to continue using all the modules.</h3>";
+		// }
 		
 	}
 	

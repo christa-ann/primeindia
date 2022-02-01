@@ -24,10 +24,9 @@
                     </h3>
 
                     <div class="p-3">
-                        <h4 class="text-muted font-18 m-b-5 text-center">Welcome Back !</h4>
-                       
-                         <p class="text-muted font-18 text-center">Subscription has expired.</p>
-                         <p class="text-muted font-18 text-center">Kindly renew your subscription.</p>
+                        <h4 class="text-muted font-18 m-b-5 text-center">Welcome Back !</h4>                       
+                         
+                         <p class="text-muted text-center" style="color:red!important;font-size: 20px!important;">Subscription has expired.<br><b>Kindly renew your subscription.</b></p>
                         <?php echo $_SESSION['logInMessage']; $_SESSION['logInMessage']=""; ?>
                        
                            
