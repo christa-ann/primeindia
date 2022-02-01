@@ -33,7 +33,7 @@ class Subscription {
 	
 	public static function validTill($db) {
 			try {
-		$query = $db->query("SELECT * FROM `subscription` ORDER BY `month` DESC LIMIT 1");
+		$query = $db->query("SELECT * FROM `subscription` ORDER BY `id` DESC LIMIT 1");
 			} catch (PDOException $e){ die($e->getMessage()); }
 		$row = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -43,7 +43,7 @@ class Subscription {
 		$date2 = strtotime("today"); 
 
 		$diff = $date1 - $date2;
-		
+
 		return round($diff / 86400);
 	}
 	
