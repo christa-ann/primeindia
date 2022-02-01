@@ -36,8 +36,15 @@ class Subscription {
 		$query = $db->query("SELECT * FROM `subscription` ORDER BY `month` DESC LIMIT 1");
 			} catch (PDOException $e){ die($e->getMessage()); }
 		$row = $query->fetch(PDO::FETCH_ASSOC);
-		$month = new DateTime($row['month']);
-		return $month->format('t M, Y');
+
+		// $month = new DateTime($row['month']);
+		// return $month->format('t M, Y');
+		$date1 = new DateTime("{$row['allowed_till']}");
+		$date2 = new DateTime("today"); 
+
+		$diff = $date1 - $date2;
+		
+		return round($diff / 86400);
 	}
 	
 	
