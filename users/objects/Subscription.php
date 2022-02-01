@@ -39,8 +39,8 @@ class Subscription {
 
 		// $month = new DateTime($row['month']);
 		// return $month->format('t M, Y');
-		$date1 = new DateTime("{$row['allowed_till']}");
-		$date2 = new DateTime("today"); 
+		$date1 = strtotime("{$row['allowed_till']}");
+		$date2 = strtotime("today"); 
 
 		$diff = $date1 - $date2;
 		

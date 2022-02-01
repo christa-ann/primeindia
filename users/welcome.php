@@ -63,7 +63,7 @@ if($_SESSION['loggedIn'] != 1) {
                             <div class="mb-2 card-body text-muted">
                                 <h3 class="text-info"><?php echo User::totalUsera($db); ?></h3>
                                 Total Users
-                                Subscription: <?php //echo Subscription::validTill($db); ?>
+                                <p>Subscription: <?php echo Subscription::validTill($db); ?> days</p>
                             </div>
                         </div>
                     </div>
